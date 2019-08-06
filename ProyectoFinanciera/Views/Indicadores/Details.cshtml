@@ -1,0 +1,43 @@
+﻿@model ProyectoFinanciera.Models.Indicadores
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Indicadores</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.COD_INDICADORINTERNO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COD_INDICADORINTERNO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DES_FECHA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DES_FECHA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NUM_VALOR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NUM_VALOR)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

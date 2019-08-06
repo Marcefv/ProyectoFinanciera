@@ -34,3 +34,8 @@ textarea {
 .about{
     with:100%;
 }
+
+.graph{
+    justify-content: center;
+    display: flex;
+}
