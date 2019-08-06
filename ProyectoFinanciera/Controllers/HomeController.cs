@@ -10,6 +10,9 @@ namespace ProyectoFinanciera.Controllers
     {
         public ActionResult Index()
         {
+            llamadasIndicadores cargarIndicadores = new llamadasIndicadores();
+            cargarIndicadores.baseDatos();
+
             return View();
         }
 
@@ -19,6 +22,9 @@ namespace ProyectoFinanciera.Controllers
 
             return View();
         }
+
+
+
 
  
     }

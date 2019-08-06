@@ -11,6 +11,8 @@ namespace ProyectoFinanciera.Controllers
 {
     public class SerializeController : Controller
     {
+
+        private IndicadoresEntities db = new IndicadoresEntities();
         // GET: Serialize
 
         public ActionResult Index()
@@ -45,16 +47,33 @@ namespace ProyectoFinanciera.Controllers
             DateTime twoyearsago = theDate.AddYears(-2);
             String hace2anios = twoyearsago.ToString("dd/MM/yyyy");
             ViewBag.hace2anios = hace2anios;
-            indicadoresReference.wsindicadoreseconomicos objRef = new indicadoresReference.wsindicadoreseconomicos();
-            DataSet ds = objRef.ObtenerIndicadoresEconomicos(codigo, hace2anios, ahora, "Marcela", "N", "marcefv.89@gmail.com", "C0C81E7IFF");
-            List<Indicadores> indicadores = ds.Tables[0].AsEnumerable().
-                Select(dataRow => new Indicadores()
-                {
-                    COD_INDICADORINTERNO = Convert.ToInt32(dataRow["COD_INDICADORINTERNO"]),
-                    DES_FECHA = Convert.ToDateTime(dataRow["DES_FECHA"]),
-                    NUM_VALOR = Convert.ToDecimal(dataRow["NUM_VALOR"])
-                }).ToList();
 
+            var indicador = (from s in db.Indicadores
+                             where (s.DES_FECHA == theDate && s.COD_INDICADORINTERNO == Convert.ToInt32(codigo))
+                             select s).ToList();
+            List<Indicadores> indicadores=null;
+            if (indicador.Count()==0)
+            {
+                indicadoresReference.wsindicadoreseconomicos objRef = new indicadoresReference.wsindicadoreseconomicos();
+                DataSet ds = objRef.ObtenerIndicadoresEconomicos(codigo, hace2anios, ahora, "Marcela", "N", "marcefv.89@gmail.com", "C0C81E7IFF");
+               indicadores = ds.Tables[0].AsEnumerable().
+                    Select(dataRow => new Indicadores()
+                    {
+                        COD_INDICADORINTERNO = Convert.ToInt32(dataRow["COD_INDICADORINTERNO"]),
+                        DES_FECHA = Convert.ToDateTime(dataRow["DES_FECHA"]),
+                        NUM_VALOR = Convert.ToDecimal(dataRow["NUM_VALOR"])
+                    }).ToList();
+
+                foreach (var item in indicadores)
+                {
+                    db.Indicadores.Add(item);
+                    db.SaveChanges();
+                }
+            }
+            else
+            {
+                
+            }
             ViewBag.y = new List<decimal>();
             ViewBag.x = new List<DateTime>();
 

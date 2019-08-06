@@ -21,7 +21,7 @@
                </ChartAreas>
             </Chart>";
     var myChart = new Chart(width: 1000, height: 400, theme:theme)
-.AddTitle("Tipo de Cambio de Venta del Dólar").AddLegend()
+.AddTitle(ViewBag.Title).AddLegend()
 .SetYAxis("Colones",500.0, 700.0)
 .AddSeries(
     chartType:"line",
