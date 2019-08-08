@@ -11,7 +11,9 @@ namespace ProyectoFinanciera.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(ClienteMetaData))]
     public partial class Cliente
     {
         public int Id { get; set; }
@@ -25,4 +27,5 @@ namespace ProyectoFinanciera.Models
     
         public virtual Distrito Distrito { get; set; }
     }
+
 }

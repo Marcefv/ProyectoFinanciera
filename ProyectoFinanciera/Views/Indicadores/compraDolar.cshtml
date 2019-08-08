@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "compraDolar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Tipo de Cambio de Compra del Dólar</h2>
+
+
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">Tipo de Cambio de Compra del Dólar</div>
+        <div class="panel-body graph"><p><img class="img-responsive" src='@Url.Action("graphTipoDeCambio", "Indicadores", new{ inicio=ViewBag.inicio, final=ViewBag.final, indicador=ViewBag.indicador,
+                                                                         titulo = ViewBag.titulo })' /></p></div>
+    </div>
+</div>
+

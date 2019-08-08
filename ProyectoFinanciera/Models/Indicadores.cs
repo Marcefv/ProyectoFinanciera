@@ -19,4 +19,6 @@ namespace ProyectoFinanciera.Models
         public System.DateTime DES_FECHA { get; set; }
         public decimal NUM_VALOR { get; set; }
     }
+
+
 }

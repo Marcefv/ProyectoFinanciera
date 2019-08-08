@@ -16,12 +16,24 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("El Progreso", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            Indicadores Económicos
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Tipo de Cambio Compra Dólar", "compraDolar", "Indicadores")</li>
+                            <li>@Html.ActionLink("Tipo de Cambio Venta Dólar", "ventaDolar", "Indicadores")</li>
+                            <li>@Html.ActionLink("Tasa Básica Pasiva", "basicaPasiva", "Indicadores")</li>
+                            <li>@Html.ActionLink("Tasa de Política Monetaria", "politicaMonetaria", "Indicadores")</li>
+                        </ul>
+                    </li>                   
+                    <li>@Html.ActionLink("Comportamiento Indicadores", "comportamientoIndicadores", "Indicadores")</li>
                 </ul>
             </div>
         </div>

@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "comportamientoIndicadores";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Comportamiento de los indicadores económicos</h2>
+
+
+<div class="row">
+    <div class="panel panel-default col-sm-6">
+        <div class="panel-heading">Tipo de Cambio de Compra del Dólar</div>
+        <div class="panel-body graph">
+            <p>
+                <img class="img-responsive" src='@Url.Action("graphTipoDeCambio", "Indicadores", new{ inicio=ViewBag.inicio, final=ViewBag.final, indicador=ViewBag.indicadorcd,
+                                                                         titulo = ViewBag.titulo })' />
+            </p>
+        </div>
+    </div>
+    <div class="panel panel-default col-sm-6">
+        <div class="panel-heading">Tipo de Cambio de Venta del Dólar</div>
+        <div class="panel-body graph">
+            <p>
+                <img class="img-responsive" src='@Url.Action("graphTipoDeCambio", "Indicadores", new{ inicio=ViewBag.inicio, final=ViewBag.final, indicador=ViewBag.indicadorvd,
+                                                                         titulo = ViewBag.titulo })' />
+            </p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="panel panel-default col-sm-6">
+        <div class="panel-heading">Tasa Básica Pasiva</div>
+        <div class="panel-body graph">
+            <p>
+                <img class="img-responsive" src='@Url.Action("graphTasas", "Indicadores", new{ inicio=ViewBag.inicio, final=ViewBag.final, indicador=ViewBag.indicadorbp,
+                                                                         titulo = ViewBag.titulo })' />
+            </p>
+        </div>
+    </div>
+    <div class="panel panel-default col-sm-6">
+        <div class="panel-heading">Tasa de política Monetaria</div>
+        <div class="panel-body graph">
+            <p>
+                <img class="img-responsive" src='@Url.Action("graphTasas", "Indicadores", new{ inicio=ViewBag.inicio, final=ViewBag.final, indicador=ViewBag.indicadorpm,
+                                                                         titulo = ViewBag.titulo })' />
+            </p>
+        </div>
+    </div>
+</div>

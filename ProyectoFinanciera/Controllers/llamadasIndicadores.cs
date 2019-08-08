@@ -119,5 +119,15 @@ namespace ProyectoFinanciera.Controllers
             
         }
 
+
+        public List<Indicadores> obtieneDatosDeBD(DateTime inicio, DateTime final, int indicador)
+        {
+            List<Indicadores> lista = new List<Indicadores>();
+            lista = db.Indicadores.Where(x => x.DES_FECHA >= inicio && x.DES_FECHA <= final 
+                        && x.COD_INDICADORINTERNO==indicador).Select(x => x).ToList();
+            return lista;
+        }
+
+
     }
 }

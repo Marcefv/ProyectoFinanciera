@@ -138,7 +138,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndicadoresController.cs" />
     <Compile Include="Controllers\llamadasIndicadores.cs" />
-    <Compile Include="Controllers\SerializeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -148,6 +147,7 @@
     <Compile Include="Models\Cliente.cs">
       <DependentUpon>IndicadoresBaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClienteMetaData.cs" />
     <Compile Include="Models\Distrito.cs">
       <DependentUpon>IndicadoresBaseModel.tt</DependentUpon>
     </Compile>
@@ -169,7 +169,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndicadoresBaseModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\indicadorModel.cs" />
     <Compile Include="Models\Provincia.cs">
       <DependentUpon>IndicadoresBaseModel.tt</DependentUpon>
     </Compile>
@@ -242,21 +241,17 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Views\Indicadores\Create.cshtml" />
-    <Content Include="Views\Indicadores\Delete.cshtml" />
-    <Content Include="Views\Indicadores\Details.cshtml" />
-    <Content Include="Views\Indicadores\Edit.cshtml" />
-    <Content Include="Views\Indicadores\Index.cshtml" />
     <Content Include="Web References\indicadoresReference\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Serialize\Index.cshtml" />
-    <Content Include="Views\Serialize\Graph.cshtml" />
-    <Content Include="Views\Serialize\BasicaPasiva.cshtml" />
-    <Content Include="Views\Serialize\DolarVenta.cshtml" />
-    <Content Include="Views\Serialize\DolarCompra.cshtml" />
-    <Content Include="Views\Serialize\PoliticaMonetaria.cshtml" />
+    <Content Include="Views\Indicadores\graphTipoDeCambio.cshtml" />
+    <Content Include="Views\Indicadores\compraDolar.cshtml" />
+    <Content Include="Views\Indicadores\ventaDolar.cshtml" />
+    <Content Include="Views\Indicadores\graphTasas.cshtml" />
+    <Content Include="Views\Indicadores\basicaPasiva.cshtml" />
+    <Content Include="Views\Indicadores\politicaMonetaria.cshtml" />
+    <Content Include="Views\Indicadores\comportamientoIndicadores.cshtml" />
     <None Include="Web References\indicadoresReference\wsindicadoreseconomicos.disco" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

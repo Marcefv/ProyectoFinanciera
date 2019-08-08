@@ -1,127 +1,114 @@
-﻿using System;
+﻿using ProyectoFinanciera.Models;
+using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ProyectoFinanciera.Models;
 
 namespace ProyectoFinanciera.Controllers
 {
     public class IndicadoresController : Controller
     {
-        private IndicadoresEntities db = new IndicadoresEntities();
-
-        // GET: Indicadores
-        public ActionResult Index()
+       
+        public ActionResult graphTipoDeCambio(DateTime inicio, DateTime final, int indicador, string titulo)
         {
-            return View(db.Indicadores.ToList());
-        }
+            llamadasIndicadores ind = new llamadasIndicadores();
+            List<Indicadores> lista = new List<Indicadores>();
+            lista = ind.obtieneDatosDeBD(inicio, final, indicador);
+            ViewBag.y = new List<decimal>();
+            ViewBag.x = new List<DateTime>();
 
-        // GET: Indicadores/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
+            foreach (var item in lista)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                ViewBag.y.Add(item.NUM_VALOR);
+                ViewBag.x.Add(item.DES_FECHA);
             }
-            Indicadores indicadores = db.Indicadores.Find(id);
-            if (indicadores == null)
-            {
-                return HttpNotFound();
-            }
-            return View(indicadores);
-        }
-
-        // GET: Indicadores/Create
-        public ActionResult Create()
-        {
+            ViewBag.x.ToArray();
+            ViewBag.y.ToArray();
+            ViewBag.Title = titulo;
             return View();
         }
 
-        // POST: Indicadores/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,COD_INDICADORINTERNO,DES_FECHA,NUM_VALOR")] Indicadores indicadores)
+        public ActionResult graphTasas(DateTime inicio, DateTime final, int indicador, string titulo)
         {
-            if (ModelState.IsValid)
-            {
-                db.Indicadores.Add(indicadores);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            llamadasIndicadores ind = new llamadasIndicadores();
+            List<Indicadores> lista = new List<Indicadores>();
+            lista = ind.obtieneDatosDeBD(inicio, final, indicador);
+            ViewBag.y = new List<decimal>();
+            ViewBag.x = new List<DateTime>();
 
-            return View(indicadores);
+            foreach (var item in lista)
+            {
+                ViewBag.y.Add(item.NUM_VALOR);
+                ViewBag.x.Add(item.DES_FECHA);
+            }
+            ViewBag.x.ToArray();
+            ViewBag.y.ToArray();
+            ViewBag.Title = titulo;
+            return View();
         }
 
-        // GET: Indicadores/Edit/5
-        public ActionResult Edit(int? id)
+
+        public ActionResult compraDolar()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Indicadores indicadores = db.Indicadores.Find(id);
-            if (indicadores == null)
-            {
-                return HttpNotFound();
-            }
-            return View(indicadores);
+            DateTime theDate = DateTime.Today;
+            DateTime twoyearsago = theDate.AddYears(-2);
+            ViewBag.inicio = twoyearsago;
+            ViewBag.final = theDate;
+            ViewBag.indicador = 317;
+            ViewBag.titulo = "Tipo de Cambio de Compra del Dólar " + twoyearsago.Year + " - " + theDate.Year;
+            return View();
         }
 
-        // POST: Indicadores/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,COD_INDICADORINTERNO,DES_FECHA,NUM_VALOR")] Indicadores indicadores)
+        public ActionResult ventaDolar()
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(indicadores).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(indicadores);
+            DateTime theDate = DateTime.Today;
+            DateTime twoyearsago = theDate.AddYears(-2);
+            ViewBag.inicio = twoyearsago;
+            ViewBag.final = theDate;
+            ViewBag.indicador = 318;
+            ViewBag.titulo = "Tipo de Cambio de Venta del Dólar " + twoyearsago.Year + " - " + theDate.Year;
+            return View();
         }
 
-        // GET: Indicadores/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult basicaPasiva()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Indicadores indicadores = db.Indicadores.Find(id);
-            if (indicadores == null)
-            {
-                return HttpNotFound();
-            }
-            return View(indicadores);
+            DateTime theDate = DateTime.Today;
+            DateTime twoyearsago = theDate.AddYears(-2);
+            ViewBag.inicio = twoyearsago;
+            ViewBag.final = theDate;
+            ViewBag.indicador = 19654;
+            ViewBag.titulo = "Tasa Básica Pasiva " + twoyearsago.Year + " - " + theDate.Year;
+            return View();
         }
 
-        // POST: Indicadores/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult politicaMonetaria()
         {
-            Indicadores indicadores = db.Indicadores.Find(id);
-            db.Indicadores.Remove(indicadores);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            DateTime theDate = DateTime.Today;
+            DateTime twoyearsago = theDate.AddYears(-2);
+            ViewBag.inicio = twoyearsago;
+            ViewBag.final = theDate;
+            ViewBag.indicador = 3541;
+            ViewBag.titulo = "Tasa de Política Monetaria " + twoyearsago.Year+ " - "+theDate.Year;
+            return View();
         }
 
-        protected override void Dispose(bool disposing)
+
+        public ActionResult comportamientoIndicadores()
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            DateTime theDate = DateTime.Today;
+            DateTime sixmonths = theDate.AddMonths(-5);
+            ViewBag.inicio =sixmonths;
+            ViewBag.final = theDate;
+            ViewBag.indicadorpm = 3541;
+            ViewBag.indicadorbp = 19654;
+            ViewBag.indicadorvd = 318;
+            ViewBag.indicadorcd = 317;
+            ViewBag.titulo = "Tasa de Política Monetaria " + sixmonths.Month + " - " + theDate.Month+ ", "+ theDate.Year;
+            return View();
         }
+
+
+
     }
 }
