@@ -33,7 +33,7 @@
         <div class="panel-body graph">
             <p>
                 <img class="img-responsive" src='@Url.Action("graphTasas", "Indicadores", new{ inicio=ViewBag.inicio, final=ViewBag.final, indicador=ViewBag.indicadorbp,
-                                                                         titulo = ViewBag.titulo })' />
+                                                                         titulo = ViewBag.titulo, mayor= ViewBag.mayorbp, menor=ViewBag.menorbp  })' />
             </p>
         </div>
     </div>
@@ -42,7 +42,7 @@
         <div class="panel-body graph">
             <p>
                 <img class="img-responsive" src='@Url.Action("graphTasas", "Indicadores", new{ inicio=ViewBag.inicio, final=ViewBag.final, indicador=ViewBag.indicadorpm,
-                                                                         titulo = ViewBag.titulo })' />
+                                                                         titulo = ViewBag.titulo, mayor= ViewBag.mayorpm, menor=ViewBag.menorpm  })' />
             </p>
         </div>
     </div>

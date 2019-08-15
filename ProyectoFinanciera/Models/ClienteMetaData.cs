@@ -16,14 +16,18 @@ namespace ProyectoFinanciera.Models
             [Required(ErrorMessage = "Este dato es obligatorio")]   
             public string Apellidos { get; set; }
             [Required(ErrorMessage = "Este dato es obligatorio")]
+            [DisplayName("Cédula")]
             public int Cedula { get; set; }
             [Required(ErrorMessage = "Este dato es obligatorio")]
-            [Range(0,110)]
+            [Range(0,130)]
             public int Edad { get; set; }
             [Required(ErrorMessage = "Este dato es obligatorio")]
+            [DisplayName("Correo")]
             public string Coreo { get; set; }
             [Required(ErrorMessage = "Este dato es obligatorio")]
+            [DisplayName("Profesión")]
             public string Profesion { get; set; }
+            [DisplayName("Distrito")]
             [Required(ErrorMessage = "Este dato es obligatorio")]   
             public int Id_distrito { get; set; }
 

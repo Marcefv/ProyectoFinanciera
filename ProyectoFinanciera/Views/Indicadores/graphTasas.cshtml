@@ -22,7 +22,7 @@ AntiAliasing=""All"">
 </Chart>";
     var myChart = new Chart(width: 1000, height: 400, theme: theme)
 .AddTitle(ViewBag.Title).AddLegend()
-.SetYAxis("Tasa (%) ", 2.0, 8.0)
+.SetYAxis("Tasa (%) ",ViewBag.menor, ViewBag.mayor)
 .AddSeries(
     chartType: "line",
     name: "Valor de la Tasa (%)",
