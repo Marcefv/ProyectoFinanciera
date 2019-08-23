@@ -203,6 +203,7 @@
     <Content Include="Content\images\imagen7.jpg" />
     <Content Include="Content\images\imagen8.jpg" />
     <Content Include="Content\images\imagen9.png" />
+    <Content Include="Content\images\organigrama.jpeg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

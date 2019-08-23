@@ -4,6 +4,8 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using ProyectoFinanciera.Models;
@@ -14,27 +16,6 @@ namespace ProyectoFinanciera.Controllers
     {
         private IndicadoresEntities db = new IndicadoresEntities();
 
-        // GET: Clientes
-        public ActionResult Index()
-        {
-            var cliente = db.Cliente.Include(c => c.Distrito);
-            return View(cliente.ToList());
-        }
-
-        // GET: Clientes/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Cliente cliente = db.Cliente.Find(id);
-            if (cliente == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cliente);
-        }
 
         // GET: Clientes/Create
         public ActionResult Create()
@@ -63,77 +44,21 @@ namespace ProyectoFinanciera.Controllers
                         clienteExistente = true;   
                     }
                 }
-                if (clienteExistente)
+                if (!clienteExistente)
                 {
                     db.Cliente.Add(cliente);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    confirmacionCorreo(cliente);
+                    return RedirectToAction("Index", "Home");
                 }
                 
             }
-            ViewBag.Id_Canton = new SelectList(db.Canton, "Id");
-            ViewBag.Provincia = new SelectList(db.Provincia, "Id");
-            ViewBag.Id_distrito = new SelectList(db.Distrito, "Id", "Distrito1");
+            var idCanton = db.Canton.Where(x => x.Distrito == cliente.Distrito);
+            var idProvincia = db.Provincia.Where(x => x.Canton == idCanton);
+            ViewBag.Id_Canton = new SelectList(db.Canton, "Id", "Canton1",idCanton );
+            ViewBag.Provincia = new SelectList(db.Provincia, "Id", "Provincia1", idProvincia);
+            ViewBag.Id_distrito = new SelectList(db.Distrito, "Id", "Distrito1", cliente.Distrito);
             return View(cliente);
-        }
-
-        // GET: Clientes/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Cliente cliente = db.Cliente.Find(id);
-            if (cliente == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Id_distrito = new SelectList(db.Distrito, "Id", "Distrito1", cliente.Id_distrito);
-            return View(cliente);
-        }
-
-        // POST: Clientes/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nombre,Apellidos,Cedula,Edad,Coreo,Profesion,Id_distrito")] Cliente cliente)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(cliente).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.Id_distrito = new SelectList(db.Distrito, "Id", "Distrito1", cliente.Id_distrito);
-            return View(cliente);
-        }
-
-        // GET: Clientes/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Cliente cliente = db.Cliente.Find(id);
-            if (cliente == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cliente);
-        }
-
-        // POST: Clientes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Cliente cliente = db.Cliente.Find(id);
-            db.Cliente.Remove(cliente);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
 
@@ -142,28 +67,89 @@ namespace ProyectoFinanciera.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public JsonResult LoadCantonesByProvincia(string id)
         {
-         
-            var ident = Convert.ToInt32(id);
-            ViewBag.Id_canton = db.Canton.Where(x => x.Id_provincia == ident).Select(p => new
+            try
             {
-                Value = p.Id,
-                Text = p.Canton1
-            }).ToList();
-            return Json(ViewBag.Id_canton, JsonRequestBehavior.AllowGet);
+                var ident = Convert.ToInt32(id);
+                ViewBag.Id_canton = db.Canton.Where(x => x.Id_provincia == ident).Select(p => new
+                {
+                    Value = p.Id,
+                    Text = p.Canton1
+                }).ToList();
+                return Json(ViewBag.Id_canton, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+
+                return Json("Error", JsonRequestBehavior.AllowGet);
+            }
+            
         }
 
         //llenar lista de distritos segun canton
         [AcceptVerbs(HttpVerbs.Get)]
         public JsonResult LoadDistritosByCanton(string id)
         {
-            var ident = Convert.ToInt32(id);
-            ViewBag.Id_distrito = db.Distrito.Where(x => x.Id_canton == ident).Select(p => new
+            try
             {
-                Value = p.Id,
-                Text = p.Distrito1
-            }).ToList();
-            return Json(ViewBag.Id_distrito, JsonRequestBehavior.AllowGet);
+                var ident = Convert.ToInt32(id);
+                ViewBag.Id_distrito = db.Distrito.Where(x => x.Id_canton == ident).Select(p => new
+                {
+                    Value = p.Id,
+                    Text = p.Distrito1
+                }).ToList();
+                return Json(ViewBag.Id_distrito, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+
+                return Json("Error", JsonRequestBehavior.AllowGet);
+            }
+           
         }
+
+        //envio de correo de confirmacion una vez suscrito
+        public void confirmacionCorreo(Cliente cliente)
+        {
+            List<Cliente> clientes = new List<Cliente>();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    
+                        var body = "<p>Email From: elprogresofinanciera@gmail.com</p><p>Message:</p>" +
+                        "       <p>Estimad@ " + cliente.Nombre + " " + cliente.Apellidos + " </p>" +
+                        "       <p>   Financiera El Progreso le da la bienvenida a su servicio de envío de los indicadores económicos:</p>" +
+                                 "<ul> <li>Tipo de Cambio de Venta del Dólar</li><li>Tipo de Cambio de Compra del Dólar</li>" +
+                                 "<li>Tasa de Política Monetaria</li><li>Tasa Básica Pasiva</li>" +
+                                 "</ul>";
+                        var message = new MailMessage();
+                        message.To.Add(new MailAddress(cliente.Coreo));
+                        message.Subject = "Bienvenid@ a el servicio de indicadores económicos de Financiera El Progreso";
+                        message.Body = body;
+                        message.IsBodyHtml = true;
+
+                        using (var smtp = new SmtpClient())
+                        {
+                        var credential = new NetworkCredential
+                        {
+                            UserName = "elprogresofinanciera@gmail.com",  
+                            Password = "passwordprogra5"  
+                        };
+                        smtp.Credentials = credential;
+                        smtp.Host = "smtp.gmail.com";
+                        smtp.Port = 587;
+                        smtp.EnableSsl = true;
+                        smtp.Send(message);
+                    }              
+                    
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e);
+            }
+        }
+
 
         protected override void Dispose(bool disposing)
         {
