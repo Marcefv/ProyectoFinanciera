@@ -139,6 +139,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndicadoresController.cs" />
     <Compile Include="Controllers\llamadasIndicadores.cs" />
+    <Compile Include="Controllers\PreguntasController.cs" />
+    <Compile Include="Controllers\RespuestasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -170,7 +172,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndicadoresBaseModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Preguntas.cs">
+      <DependentUpon>IndicadoresBaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Provincia.cs">
+      <DependentUpon>IndicadoresBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Respuestas.cs">
       <DependentUpon>IndicadoresBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
@@ -194,6 +202,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\092387dd-e036-4842-85e1-d40f738c7537_200x200.png" />
+    <Content Include="Content\images\644fc4d4-c773-47b3-9f3e-31d245fd9684_200x200.png" />
     <Content Include="Content\images\imagen1.png" />
     <Content Include="Content\images\imagen2.jpg" />
     <Content Include="Content\images\imagen3.png" />
@@ -259,6 +269,13 @@
     <Content Include="Views\Clientes\Details.cshtml" />
     <Content Include="Views\Clientes\Edit.cshtml" />
     <Content Include="Views\Clientes\Index.cshtml" />
+    <Content Include="Views\Preguntas\Create.cshtml" />
+    <Content Include="Views\Preguntas\Details.cshtml" />
+    <Content Include="Views\Preguntas\Index.cshtml" />
+    <Content Include="Views\Respuestas\Create.cshtml" />
+    <Content Include="Views\Respuestas\Details.cshtml" />
+    <Content Include="Views\Respuestas\Index.cshtml" />
+    <Content Include="Views\Respuestas\Respuestas.cshtml" />
     <None Include="Web References\indicadoresReference\wsindicadoreseconomicos.disco" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

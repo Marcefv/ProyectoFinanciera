@@ -31,5 +31,7 @@ namespace ProyectoFinanciera.Models
         public virtual DbSet<Indicadores> Indicadores { get; set; }
         public virtual DbSet<Provincia> Provincia { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Preguntas> Preguntas { get; set; }
+        public virtual DbSet<Respuestas> Respuestas { get; set; }
     }
 }

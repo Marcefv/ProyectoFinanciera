@@ -1,0 +1,60 @@
+﻿@model IEnumerable<ProyectoFinanciera.Models.Preguntas>
+
+@{
+    ViewBag.Title = " Bienvenido Foro Público";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Foro</h2>
+<br />
+<p>
+    En esta sección puede realizar consultas abiertas que pueden ser respondidas por otros usuarios, así como responder a consultas de otras personas
+</p>
+<br />
+<div class="row">
+    <div class="col-sm-3">
+        <p>
+            @Html.ActionLink("Crear una nueva pregunta", "Create")
+        </p>
+    </div>
+    <div class="col-sm-offset-10">
+        <p>
+            @Html.ActionLink("Ver Respuestas Generales", "Index", "Respuestas")
+        </p>
+    </div>
+</div>
+<h4>Preguntas</h4>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pregunta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pregunta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.ActionLink("Detalles de pregunta", "Details", new { id = item.ID })
+            </td>
+        </tr>
+
+    }
+
+</table>

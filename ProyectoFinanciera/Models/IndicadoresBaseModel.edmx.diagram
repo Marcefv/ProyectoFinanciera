@@ -14,6 +14,9 @@
         <AssociationConnector Association="IndicadoresModel.FK_Canton_Provincia" ManuallyRouted="false" />
         <AssociationConnector Association="IndicadoresModel.FK_Distrito_Canton" ManuallyRouted="false" />
         <AssociationConnector Association="IndicadoresModel.FK_Cliente_Distrito" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="IndicadoresModel.Preguntas" Width="1.5" PointX="5.375" PointY="4.875" />
+        <EntityTypeShape EntityType="IndicadoresModel.Respuestas" Width="1.5" PointX="7.625" PointY="4.875" />
+        <AssociationConnector Association="IndicadoresModel.FK_Respuestas_Preguntas" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

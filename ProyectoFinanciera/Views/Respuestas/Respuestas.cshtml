@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ProyectoFinanciera.Models.Respuestas>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Respuestas relacionadas</h2>
+
+<p>
+    @Html.ActionLink("Responder una pregunta", "Create")
+</p>
+
+<h2>Pregunta: @ViewBag.Nombre</h2>
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Respuesta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombreResponde)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Preguntas.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Respuesta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombreResponde)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Preguntas.Nombre)
+            </td>
+
+            <td>
+                @Html.ActionLink("Ver la respuesta", "Details", new { id = item.id }) 
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Html.ActionLink("Regresar a sección de Preguntas", "Index", "Preguntas")
+<br>
+@Html.ActionLink("Regresar a sección de Respuestas Generales", "Index", "Respuestas")
+
