@@ -17,9 +17,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                   <img src="@Url.Content("~/Content/images/092387dd-e036-4842-85e1-d40f738c7537_200x200.png")" style="width:40px;height:40px;">
-                   
-</div>
+                   <img src="@Url.Content("~/Content/images/d5827044-9927-4ec5-b205-fb6cdc646ab8_200x200.png")" style="width:40px;height:40px;">                  
+            </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li> <div class="col-sm-1"></div> </li>
@@ -39,7 +38,7 @@
                     </li>
                     <li>@Html.ActionLink("Comportamiento Indicadores", "comportamientoIndicadores", "Indicadores")</li>
                     <li>@Html.ActionLink("Suscribirse", "Create", "Clientes")</li>
-                    <li>@Html.ActionLink("Foro", "Index", "Preguntas")</li>
+                    <li>@Html.ActionLink("Consultas", "Index", "Preguntas")</li>
                 </ul>
             </div>
         </div>
@@ -48,7 +47,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <div class="about"> <p> @DateTime.Now.Year - Proyecto Final Programación Avanzada en Web - Javier Barboza, Marcela Fernández, Juan Carlos Rogríguez</p></div>   
         </footer>
     </div>
 

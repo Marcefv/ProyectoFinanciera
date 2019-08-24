@@ -110,13 +110,12 @@ namespace ProyectoFinanciera.Controllers
         //envio de correo de confirmacion una vez suscrito
         public void confirmacionCorreo(Cliente cliente)
         {
-            List<Cliente> clientes = new List<Cliente>();
             try
             {
                 if (ModelState.IsValid)
                 {
                     
-                        var body = "<p>Email From: elprogresofinanciera@gmail.com</p><p>Message:</p>" +
+                        var body = "<p>Email From: elprogresofinanciera@gmail.com</p>" +
                         "       <p>Estimad@ " + cliente.Nombre + " " + cliente.Apellidos + " </p>" +
                         "       <p>   Financiera El Progreso le da la bienvenida a su servicio de envío de los indicadores económicos:</p>" +
                                  "<ul> <li>Tipo de Cambio de Venta del Dólar</li><li>Tipo de Cambio de Compra del Dólar</li>" +

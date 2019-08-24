@@ -31,11 +31,22 @@ textarea {
     margin-right:5px;
 }
 
-.about{
-    with:100%;
+.about {
+    text-align: center;
 }
 
 .graph{
     justify-content: center;
     display: flex;
+}
+
+.ptitle {
+    text-align: center;
+}
+.panel-heading {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    text-align: center;
 }
