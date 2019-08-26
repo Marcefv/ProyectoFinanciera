@@ -3,15 +3,67 @@
     ViewBag.Title = "compraDolar";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="text-center"><h2>Tipo de Cambio de Compra del Dólar</h2></div>
 
-<h2>Tipo de Cambio de Compra del Dólar</h2>
-
-
+<br />
 <div class="row">
     <div class="panel panel-default">
-        <div class="panel-heading">Tipo de Cambio de Compra del Dólar</div>
+        <div class="panel-heading text-center"><h4>Descripción y Cálculo</h4></div>
+        <div class="panel-body">
+            <h5><i>Descripción</i></h5>
+            <p>
+                Todas las entidades autorizadas para participar en el mercado cambiario deben presentar información sobre Los tipos de cambio para la compra y para la venta de monedas extranjeras
+                anunciados en ventanilla, los cuales corresponden al tipo de
+                cambio mínimo al cual la entidad tiene el compromiso de adquirir divisas del público,
+                y al tipo de cambio máximo al cual la entidad tiene el compromiso de vender divisas
+                al público, respectivamente.
+            </p>
+            <p>
+                El Banco Central de Costa Rica calculará para cada día hábil, un tipo de cambio de referencia
+                para la compra y otro para la venta del dólar de los Estados Unidos de América
+            </p>
+            <p>
+                Esos tipos de cambio corresponderán al valor comercial efectivo que, a la fecha de pago,
+                tuviera la moneda extranjera adeudada,  y serán publicados por el Banco Central antes de
+                finalizar el día hábil, en su sitio Web.
+            </p>
+            <br />
+            <h5><i>Cálculo</i></h5>
+            <p>
+                El cálculo de los tipos de compra y venta del dólar poseen una cantidad amplia de variables a nivel internacional que pueden ayudar a la fluctuación del precio, como por ejemplo el precio del crudo a nivel internacional. Generalmente se puede decir que el precio bruto real del dólar se podría indicar mediante la división de la masa monetaria entre la reserva del banco central, sin embargo el cálculo actual en Costa Rica del precio de referencia del dólar consiste en un ponderado de las cotizaciones de compra y venta de los intermediarios financieros.
+            </p>
+         
+            <p>
+                El cálculo del tipo de cambio de referencia de compra para el día t será el promedio
+                del precio de las transacciones de compra ponderado por el monto de cada transacción para
+                el día t-1, durante el período definido por acuerdo de la Junta Directiva del BCCR.
+            </p>
+           
+            <br />
+            <h5><i>Periodicidad</i></h5>
+            <p>
+                El BCCR es el encargado de realizar dicho calculo y publicarlo todos los días para que se rija al día siguiente, por lo que se puede decir que posee una periodicidad diaria.
+                Es un hecho que el precio difiere entre la venta y la compra del dólar para mantener una ganancia constante para el BCCR, y dicho cálculo diferencial entre tasas se realiza tomando las cotizaciones de las ventanillas (a nivel general de todas las transacciones de los intermediarios cambiarios) desde las 10:00am hasta las 4:00pm todos los días. Dicha metodología rige desde el 2017 con el propósito de reducir el diferencial entre compra y venta del dólar ya que permite tomar, en un periodo de tiempo más amplio una mayor cantidad de cotizaciones (antes del 2017 solo regían las cotizaciones reportadas de 2:00pm a 5:00pm). Dicho cambio trajo muchos beneficios al consumidor ya que se redujo de manera inmediata la diferencia cambiaria de 13 colones a 7.07 colones (actualmente en Agosto 2019 aproximadamente 7,13).
+            </p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading text-center"><h4>Implicaciones</h4></div>
+        <div class="panel-body">
+            <p>
+                El consumidor siempre se va a ver beneficiado con la baja en el precio del dólar, ya que le permite tener una mayor liquidez y permite reducir el precio de importaciones, mientras que los inversionistas de cuentas en dólares siempre se van a ver afectados por las bajas por razones obvias. Popularmente se dice que el precio del dólar se rige por oferta y demanda, y esto es lo que lo mantiene estable en ciertos periodos de tiempo, como por ejemplo la baja que ha sufrido el dólar desde principios de 2019 hasta agosto del mismo año, produce una gran cantidad de demanda en el mercado por la moneda, y permite estabilizar el precio dependiendo de la cantidad de dólares que hayan en disponibles en el BCCR y la creciente cantidad de transacciones que se realizan por día.
+            </p>    
+            <p>Los cambio en el valor de compra y venta de la divisa pueden afectar por ejemplo los precios en bienes de consumo, dado que muchas empresas adquieren los vienes en dólares y los venden en colones. En el caso de las personas o empresas que ganan en dólares, aumentos en el valor de la divisa los beneficia.</p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4>Comportamiento Histórico Tipo de Cambio de Compra del Dólar</h4></div>
         <div class="panel-body graph"><p><img class="img-responsive" src='@Url.Action("graphTipoDeCambio", "Indicadores", new{ inicio=ViewBag.inicio, final=ViewBag.final, indicador=ViewBag.indicador,
-                                                                         titulo = ViewBag.titulo })' /></p></div>
+                                                                         titulo = ViewBag.titulo, height= ViewBag.height, width= ViewBag.width })' /></p></div>
     </div>
 </div>
 

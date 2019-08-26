@@ -67,9 +67,22 @@ namespace ProyectoFinanciera.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Respuestas.Add(respuestas);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Respuestas.Add(respuestas);
+                    db.SaveChanges();
+                    ViewBag.message = "Mensaje";
+                    ModelState.Clear();
+                    ViewBag.PreguntaId = new SelectList(db.Preguntas, "ID", "Pregunta");
+                    return View();
+                }
+                catch (Exception)
+                {
+                    ViewBag.error = "Error";
+                    ViewBag.PreguntaId = new SelectList(db.Preguntas, "ID", "Pregunta");
+                    return View();
+                }
+                
             }
 
             ViewBag.PreguntaId = new SelectList(db.Preguntas, "ID", "Nombre", respuestas.PreguntaId);

@@ -7,12 +7,13 @@
 }
 
 <h2>Respuestas relacionadas</h2>
+<br />
 
 <p>
-    @Html.ActionLink("Responder una pregunta", "Create")
+    <button class="btn btn-primary" onclick="location.href='@Url.Action("Create")';return false;">Responder</button>
 </p>
 
-<h2>Pregunta: @ViewBag.Nombre</h2>
+<h3>Pregunta: @ViewBag.Nombre</h3>
 <table class="table">
     <tr>
 
@@ -22,10 +23,7 @@
         <th>
             @Html.DisplayNameFor(model => model.nombreResponde)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Preguntas.Nombre)
-        </th>
-        <th></th>
+        <th>Detalles</th>
     </tr>
 
     @foreach (var item in Model)
@@ -37,10 +35,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.nombreResponde)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Preguntas.Nombre)
-            </td>
-
             <td>
                 @Html.ActionLink("Ver la respuesta", "Details", new { id = item.id }) 
             </td>

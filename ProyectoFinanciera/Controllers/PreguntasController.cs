@@ -50,9 +50,20 @@ namespace ProyectoFinanciera.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Preguntas.Add(preguntas);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Preguntas.Add(preguntas);
+                    db.SaveChanges();
+                    ViewBag.message = "Mensaje";
+                    ModelState.Clear();
+                    return View();
+                }
+                catch (Exception)
+                {
+                    ViewBag.error = "Error";
+                    return View();
+                }
+               
             }
 
             return View(preguntas);

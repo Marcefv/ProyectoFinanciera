@@ -13,7 +13,7 @@
         <div class="panel-body graph">
             <p>
                 <img class="img-responsive" src='@Url.Action("graphTipoDeCambio", "Indicadores", new{ inicio=ViewBag.inicio, final=ViewBag.final, indicador=ViewBag.indicadorcd,
-                                                                         titulo = ViewBag.titulo })' />
+                                                                         titulo = "Tipo de Cambio de Compra del Dólar últimos 6 meses",height= ViewBag.height, width= ViewBag.width})' />
             </p>
         </div>
     </div>
@@ -22,7 +22,7 @@
         <div class="panel-body graph">
             <p>
                 <img class="img-responsive" src='@Url.Action("graphTipoDeCambio", "Indicadores", new{ inicio=ViewBag.inicio, final=ViewBag.final, indicador=ViewBag.indicadorvd,
-                                                                         titulo = ViewBag.titulo })' />
+                                                                         titulo = "Tipo de Cambio de Venta del Dólar últimos 6 meses",height= ViewBag.height, width= ViewBag.width  })' />
             </p>
         </div>
     </div>
@@ -33,7 +33,7 @@
         <div class="panel-body graph">
             <p>
                 <img class="img-responsive" src='@Url.Action("graphTasas", "Indicadores", new{ inicio=ViewBag.inicio, final=ViewBag.final, indicador=ViewBag.indicadorbp,
-                                                                         titulo = ViewBag.titulo, mayor= ViewBag.mayorbp, menor=ViewBag.menorbp  })' />
+                                                                         titulo = "Tasa Básica Pasiva últimos 6 meses" , mayor= ViewBag.mayorbp, menor=ViewBag.menorbp, height= ViewBag.height, width= ViewBag.width  })' />
             </p>
         </div>
     </div>
@@ -42,7 +42,7 @@
         <div class="panel-body graph">
             <p>
                 <img class="img-responsive" src='@Url.Action("graphTasas", "Indicadores", new{ inicio=ViewBag.inicio, final=ViewBag.final, indicador=ViewBag.indicadorpm,
-                                                                         titulo = ViewBag.titulo, mayor= ViewBag.mayorpm, menor=ViewBag.menorpm  })' />
+                                                                         titulo = "Tasa de Política Monetaria últimos 6 meses" , mayor= ViewBag.mayorpm, menor=ViewBag.menorpm,height= ViewBag.height, width= ViewBag.width  })' />
             </p>
         </div>
     </div>

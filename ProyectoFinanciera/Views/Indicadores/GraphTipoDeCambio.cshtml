@@ -13,14 +13,21 @@
              ShadowColor=""Transparent"">
 
              <AxisX Title=""Fecha"" IsLabelAutoFit=""True"">
-
+                <LabelStyle Font=""Trebuchet MS, 10pt, style=Bold"" />
              </AxisX>
+            <AxisY  IsLabelAutoFit=""True"">
+                    <LabelStyle Font=""Trebuchet MS, 10pt, style=Bold"" />
+                 </AxisY>
 
              <Area3DStyle Enable3D=""False"" Inclination=""60"" Rotation=""45""/>
-          </ChartArea>
+            </ChartArea>
        </ChartAreas>
+<Legends>
+    <Legend _Template_=""All"" BackColor=""Transparent"" Docking=""Bottom"" Font=""Trebuchet MS, 10pt, style=Bold"" LegendStyle=""Row"">
+    </Legend>
+  </Legends>
     </Chart>";
-    var myChart = new Chart(width: 1000, height: 400, theme: theme)
+    var myChart = new Chart(width: ViewBag.width, height: ViewBag.height, theme: theme)
 .AddTitle(ViewBag.Title).AddLegend()
 .SetYAxis("Colones", 530.0, 680.0)
 .AddSeries(

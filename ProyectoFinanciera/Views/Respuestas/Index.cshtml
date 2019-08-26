@@ -7,9 +7,9 @@
 }
 
 <h2>Respuestas Generales</h2>
-
+<br />
 <p>
-    @Html.ActionLink("Responder una pregunta", "Create")
+    <button class="btn btn-primary" onclick="location.href='@Url.Action("Create")';return false;">Responder una pregunta</button>
 </p>
 
 <div class="form-group">
@@ -24,13 +24,13 @@
             @Html.DisplayNameFor(model => model.Preguntas.Pregunta)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Preguntas.Nombre)
+           Usuario Pregunta
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.nombreResponde)
+            Usuario Responde
         </th>
 
-        <th></th>
+        <th>Detalles</th>
     </tr>
 
     @foreach (var item in Model)

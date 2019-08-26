@@ -33,23 +33,36 @@
         </div>
     </div>
     <div class="row">
-            <div class="panel index panel-default col-sm-3 col-sm-offset-1">
-                <div class="panel-heading">Tasa de Política Monetaria</div>
-                <div class="panel-body">Panel Content</div>
-            </div>
-            <div class="panel index panel-primary col-sm-3">
-                <div class="panel-heading">Tasa Básic Pasiva</div>
-                <div class="panel-body">Panel Content</div>
-            </div>
-            <div class="panel index panel-default col-sm-3">
-                <div class="panel-heading">
-                    Tipo de cambio de compra del dólar
+            <div class="panel index panel-default col-sm-6 clickable" onclick="location.href='@Url.Action("politicaMonetaria", "Indicadores")'">
+                <div class="panel-heading ">Tasa de Política Monetaria</div>
+                <div class="panel-body">
+                    La Tasa de Política Monetaria es la tasa de interés objetivo del BCCR, utilizada como referencia para conducir el costo de las operaciones a un día plazo en el Mercado Integrado de Liquidez dentro de un corredor formado por las tasas de interés de sus facilidades permanentes de depósito y crédito
                 </div>
-                <div class="panel-body">Panel Content</div>
             </div>
-            <div class="panel index panel-primary col-sm-3">
-                <div class="panel-heading"> Tipo de Cambio Venta del dólar </div>
-                <div class="panel-body">Panel Content</div>
+            <div class="panel index panel-primary col-sm-6 clickable" onclick="location.href='@Url.Action("basicaPasiva", "Indicadores")'">
+                <div class="panel-heading">Tasa Básica Pasiva</div>
+                <div class="panel-body">La Tasa Básica Pasiva consiste en un promedio ponderado de las tasa de intereses brutas de captación de plazo en colones, implicadas en los diversos grupos de intermediarios financieros pertenecientes a las Otras Sociedades de Depósito. El cálculo del promedio posteriormente se redondea al veinteavo punto porcentual más cercano</div>
             </div>
+         
 </div>
+    <div class="row">
+        <div class="panel index panel-primary  col-sm-6 clickable" onclick="location.href='@Url.Action("compraDolar", "Indicadores")'">
+            <div class="panel-heading">
+                Tipo de cambio de compra del dólar
+            </div>
+            <div class="panel-body">
+                El tipo de cambio de referencia de compra para un día será el promedio
+                del precio de las transacciones de compra ponderado por el monto de cada transacción para
+                el día anterior
+            </div>
+        </div>
+        <div class="panel index panel-default  col-sm-6 clickable " onclick="location.href='@Url.Action("ventaDolar", "Indicadores")'">
+            <div class="panel-heading"> Tipo de Cambio Venta del dólar </div>
+            <div class="panel-body">
+                El tipo de cambio de referencia de venta para un día será el promedio
+                del precio de las transacciones de venta ponderado por el monto de cada transacción para
+                el día anterior
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,4 +1,4 @@
-﻿@model ProyectoFinanciera.Models.Cliente
+﻿@model ProyectoFinanciera.Models.ClientesDir
 
 @{
     ViewBag.Title = "Create";
@@ -13,6 +13,18 @@
 
 <div class="form-horizontal">
     <h4>Suscripciones</h4>
+    <div class="alert alert-success alert-dismissable" id="Mensaje" hidden>
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        Se ha suscrito exitosamete.
+    </div>
+    <div class="alert alert-danger alert-dismissable" id="Error" hidden>
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        Hubo un error, no se pudo realizar la suscripción.
+    </div>
+    <div class="alert alert-danger alert-dismissable" id="Correo" hidden>
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        El correo ingresado ya se encuentra suscrito a la página.
+    </div>
     <hr />
     <br />
     <p>Si se suscribe a la página recibirá los valores de los indicadores económicos por correo cada vez que ingrese a la página</p>
@@ -69,22 +81,21 @@
     <div class="form-group">
         @Html.Label("Provincia", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("Provincia", null,"Seleccione uno", htmlAttributes: new { @class = "form-control", id = "provincias" })
-            @Html.ValidationMessageFor(model => model.Id_distrito, "", new { @class = "text-danger" })
+            @Html.DropDownListFor(model => model.Id_provincia, (SelectList)ViewBag.Provincia, "Seleccione uno", htmlAttributes: new { @class = "form-control", id = "provincias" })
+            @Html.ValidationMessageFor(model => model.Id_provincia, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="form-group">
         @Html.Label("Cantón", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("Id_canton", null, "", htmlAttributes: new { @class = "form-control", id = "cantones", disabled = "disbaled" })
-            @Html.ValidationMessageFor(model => model.Id_distrito, "", new { @class = "text-danger" })
+            @Html.DropDownListFor(model => model.Canton.Id, (SelectList)ViewBag.Id_canton, "Seleccione uno", htmlAttributes: new { @class = "form-control", id = "cantones", disabled="disabled"})
+            @Html.ValidationMessageFor(model => model.Id_canton, "", new { @class = "text-danger" })
         </div>
     </div>
-
     <div class="form-group">
         @Html.LabelFor(model => model.Id_distrito, "Distrito", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("Id_distrito", null, "", htmlAttributes: new { @class = "form-control", id = "distritos", disabled = "disbaled" })
+            @Html.DropDownListFor(model => model.Id_distrito, (SelectList)ViewBag.Id_distrito, "Seleccione uno", htmlAttributes: new { @class = "form-control", id = "distritos", disabled = "disabled" })
             @Html.ValidationMessageFor(model => model.Id_distrito, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -103,20 +114,16 @@
         $("#provincias").change(function () {
             var provincia_id = $(this).val();
             $("#cantones").removeAttr("disabled");
-            $("#distritos").attr('disabled', 'disabled');
             $("#distritos").empty();
+            $("#distritos").append($('<option/>').val(null).text("Seleccione uno"));
             $.getJSON("../Clientes/LoadCantonesByProvincia", { id: provincia_id },
                 function (data) {
                     var select = $("#cantones");
                     select.empty();
-                    if (data == "Error") {
-                        select.empty();
-                    } else {
-                        $.each(data, function (index, itemData) {
-                            select.append($('<option/>').val(itemData.Value).text(itemData.Text));
-                        });
-                    }
-                   
+                    select.append($('<option/>').val(null).text("Seleccione uno"));
+                    $.each(data, function (index, itemData) {
+                        select.append($('<option/>').val(itemData.Value).text(itemData.Text));
+                    });
                 });
         });    
         $("#cantones").change(function () {
@@ -126,15 +133,21 @@
                 function (data) {
                     var select = $("#distritos");
                     select.empty();
-                    if (data == "Error") {
-                        select.empty();
-                    } else {
-                        $.each(data, function (index, itemData) {
-                            select.append($('<option/>').val(itemData.Value).text(itemData.Text));
-                        });
-                    }
-                    
+                    $.each(data, function (index, itemData) {
+                        select.append($('<option/>').val(itemData.Value).text(itemData.Text));
+                    });
                 });
         }); 
+        
+        if ('@ViewBag.message' == "Mensaje") {
+            $("#Mensaje").removeAttr("hidden");
+       }
+        if ('@ViewBag.error' == "Error") {
+            $("#Error").removeAttr("hidden");
+        }
+        if ('@ViewBag.correo' == "Error") {
+            $("#Correo").removeAttr("hidden");
+       }
+   
     });
 </script>

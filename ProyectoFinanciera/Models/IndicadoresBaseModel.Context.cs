@@ -33,5 +33,7 @@ namespace ProyectoFinanciera.Models
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Preguntas> Preguntas { get; set; }
         public virtual DbSet<Respuestas> Respuestas { get; set; }
+
+        public System.Data.Entity.DbSet<ProyectoFinanciera.Models.ClientesDir> ClientesDirs { get; set; }
     }
 }

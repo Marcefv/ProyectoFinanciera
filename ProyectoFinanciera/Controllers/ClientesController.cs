@@ -20,9 +20,9 @@ namespace ProyectoFinanciera.Controllers
         // GET: Clientes/Create
         public ActionResult Create()
         {
-            ViewBag.Id_Canton = new SelectList(db.Canton, "Id", "Canton1");
+            ViewBag.Id_Canton = new SelectList(db.Canton.Where(x => x.Id_provincia == 1), "Id", "Canton1");
             ViewBag.Provincia = new SelectList(db.Provincia, "Id", "Provincia1");
-            ViewBag.Id_distrito = new SelectList(db.Distrito, "Id", "Distrito1");
+            ViewBag.Id_distrito = new SelectList(db.Distrito.Where(x => x.Id_canton == 1), "Id", "Distrito1");
             return View();
         }
 
@@ -31,33 +31,59 @@ namespace ProyectoFinanciera.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nombre,Apellidos,Cedula,Edad,Coreo,Profesion,Id_distrito")] Cliente cliente)
+        public ActionResult Create([Bind(Include = "Id,Nombre,Apellidos,Cedula,Edad,Coreo,Profesion,Id_provincia, Id_canton, Id_distrito")] ClientesDir cliente)
         {
             if (ModelState.IsValid)
             {
-                var clientesLista= db.Cliente.ToList();
-                var clienteExistente= false;
-                foreach (var item in clientesLista)
+                try
                 {
-                    if (cliente.Coreo==item.Coreo)
+                    var clientesLista = db.Cliente.ToList();
+                    var clienteExistente = false;
+                    foreach (var item in clientesLista)
                     {
-                        clienteExistente = true;   
+                        if (cliente.Coreo == item.Coreo)
+                        {
+                            clienteExistente = true;
+                            ViewBag.correo = "Error";
+                            ViewBag.Id_Canton = new SelectList(db.Canton.Where(x => x.Id_provincia == 1), "Id", "Canton1");
+                            ViewBag.Provincia = new SelectList(db.Provincia, "Id", "Provincia1");
+                            ViewBag.Id_distrito = new SelectList(db.Distrito.Where(x => x.Id_canton == 1), "Id", "Distrito1");
+                            return View();
+                        }
+                    }
+                    if (!clienteExistente)
+                    {
+                        var client = new Cliente();
+                        client.Apellidos = cliente.Apellidos;
+                        client.Cedula = cliente.Cedula;
+                        client.Coreo = cliente.Coreo;
+                        client.Id_distrito = cliente.Id_distrito;
+                        client.Edad = cliente.Edad;
+                        client.Nombre = cliente.Nombre;
+                        client.Profesion = cliente.Profesion;
+                        db.Cliente.Add(client);
+                        db.SaveChanges();
+                        confirmacionCorreo(client);
+                        ViewBag.message = "Mensaje";
+                        ViewBag.Id_Canton = new SelectList(db.Canton.Where(x => x.Id_provincia == 1), "Id", "Canton1");
+                        ViewBag.Provincia = new SelectList(db.Provincia, "Id", "Provincia1");
+                        ViewBag.Id_distrito = new SelectList(db.Distrito.Where(x => x.Id_canton == 1), "Id", "Distrito1");
+                        ModelState.Clear();
+                        return View();
                     }
                 }
-                if (!clienteExistente)
+                catch (Exception)
                 {
-                    db.Cliente.Add(cliente);
-                    db.SaveChanges();
-                    confirmacionCorreo(cliente);
-                    return RedirectToAction("Index", "Home");
-                }
-                
+                    ViewBag.error = "Error";
+                    ViewBag.Id_Canton = new SelectList(db.Canton.Where(x => x.Id_provincia == 1), "Id", "Canton1");
+                    ViewBag.Provincia = new SelectList(db.Provincia, "Id", "Provincia1");
+                    ViewBag.Id_distrito = new SelectList(db.Distrito.Where(x => x.Id_canton == 1), "Id", "Distrito1");
+                    return View();
+                }    
             }
-            var idCanton = db.Canton.Where(x => x.Distrito == cliente.Distrito);
-            var idProvincia = db.Provincia.Where(x => x.Canton == idCanton);
-            ViewBag.Id_Canton = new SelectList(db.Canton, "Id", "Canton1",idCanton );
-            ViewBag.Provincia = new SelectList(db.Provincia, "Id", "Provincia1", idProvincia);
-            ViewBag.Id_distrito = new SelectList(db.Distrito, "Id", "Distrito1", cliente.Distrito);
+            ViewBag.Id_Canton = new SelectList(db.Canton.Where(x => x.Id_provincia == 1), "Id", "Canton1");
+            ViewBag.Provincia = new SelectList(db.Provincia, "Id", "Provincia1");
+            ViewBag.Id_distrito = new SelectList(db.Distrito.Where(x => x.Id_canton == 1), "Id", "Distrito1");
             return View(cliente);
         }
 
@@ -123,7 +149,7 @@ namespace ProyectoFinanciera.Controllers
                                  "</ul>";
                         var message = new MailMessage();
                         message.To.Add(new MailAddress(cliente.Coreo));
-                        message.Subject = "Bienvenid@ a el servicio de indicadores económicos de Financiera El Progreso";
+                        message.Subject = "Bienvenid@ al servicio de indicadores económicos de Financiera El Progreso";
                         message.Body = body;
                         message.IsBodyHtml = true;
 

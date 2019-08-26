@@ -151,6 +151,7 @@
       <DependentUpon>IndicadoresBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ClienteMetaData.cs" />
+    <Compile Include="Models\ClientesDir.cs" />
     <Compile Include="Models\Distrito.cs">
       <DependentUpon>IndicadoresBaseModel.tt</DependentUpon>
     </Compile>
@@ -204,6 +205,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\images\092387dd-e036-4842-85e1-d40f738c7537_200x200.png" />
     <Content Include="Content\images\644fc4d4-c773-47b3-9f3e-31d245fd9684_200x200.png" />
+    <Content Include="Content\images\ajuste.PNG" />
     <Content Include="Content\images\d5827044-9927-4ec5-b205-fb6cdc646ab8_200x200.png" />
     <Content Include="Content\images\imagen1.png" />
     <Content Include="Content\images\imagen2.jpg" />
@@ -215,6 +217,8 @@
     <Content Include="Content\images\imagen8.jpg" />
     <Content Include="Content\images\imagen9.png" />
     <Content Include="Content\images\organigrama.jpeg" />
+    <Content Include="Content\images\tbp.PNG" />
+    <Content Include="Content\images\tcalc.PNG" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -266,10 +270,6 @@
     <Content Include="Views\Indicadores\politicaMonetaria.cshtml" />
     <Content Include="Views\Indicadores\comportamientoIndicadores.cshtml" />
     <Content Include="Views\Clientes\Create.cshtml" />
-    <Content Include="Views\Clientes\Delete.cshtml" />
-    <Content Include="Views\Clientes\Details.cshtml" />
-    <Content Include="Views\Clientes\Edit.cshtml" />
-    <Content Include="Views\Clientes\Index.cshtml" />
     <Content Include="Views\Preguntas\Create.cshtml" />
     <Content Include="Views\Preguntas\Details.cshtml" />
     <Content Include="Views\Preguntas\Index.cshtml" />

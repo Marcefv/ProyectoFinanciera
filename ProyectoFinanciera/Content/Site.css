@@ -24,11 +24,9 @@ textarea {
 }
 
 .index{
-    min-height: 150px;
-    min-width: 170px;
-    max-width: 250px;
-    margin-top:10px;
-    margin-right:5px;
+    min-height: 164px;
+    max-height: 180px;
+    margin-top:20px;
 }
 
 .about {
@@ -49,4 +47,8 @@ textarea {
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     text-align: center;
+}
+
+.clickable {
+    cursor: pointer;
 }

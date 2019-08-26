@@ -10,13 +10,15 @@ namespace ProyectoFinanciera.Controllers
     public class IndicadoresController : Controller
     {
        
-        public ActionResult graphTipoDeCambio(DateTime inicio, DateTime final, int indicador, string titulo)
+        public ActionResult graphTipoDeCambio(DateTime inicio, DateTime final, int indicador, string titulo, int height, int width)
         {
             llamadasIndicadores ind = new llamadasIndicadores();
             List<Indicadores> lista = new List<Indicadores>();
             lista = ind.obtieneDatosDeBD(inicio, final, indicador);
             ViewBag.y = new List<decimal>();
             ViewBag.x = new List<DateTime>();
+            ViewBag.height = height;
+            ViewBag.width = width;
 
             foreach (var item in lista)
             {
@@ -29,7 +31,7 @@ namespace ProyectoFinanciera.Controllers
             return View();
         }
 
-        public ActionResult graphTasas(DateTime inicio, DateTime final, int indicador, string titulo, float mayor, float menor)
+        public ActionResult graphTasas(DateTime inicio, DateTime final, int indicador, string titulo, float mayor, float menor, int height, int width)
         {
             llamadasIndicadores ind = new llamadasIndicadores();
             List<Indicadores> lista = new List<Indicadores>();
@@ -38,7 +40,8 @@ namespace ProyectoFinanciera.Controllers
             ViewBag.x = new List<DateTime>();
             ViewBag.mayor = mayor;
             ViewBag.menor = menor;
-
+            ViewBag.height = height;
+            ViewBag.width = width;
             foreach (var item in lista)
             {
                 ViewBag.y.Add(item.NUM_VALOR);
@@ -59,6 +62,8 @@ namespace ProyectoFinanciera.Controllers
             ViewBag.final = theDate;
             ViewBag.indicador = 317;
             ViewBag.titulo = "Tipo de Cambio de Compra del Dólar " + twoyearsago.Year + " - " + theDate.Year;
+            ViewBag.height = 400;
+            ViewBag.width = 1000;
             return View();
         }
 
@@ -70,6 +75,8 @@ namespace ProyectoFinanciera.Controllers
             ViewBag.final = theDate;
             ViewBag.indicador = 318;
             ViewBag.titulo = "Tipo de Cambio de Venta del Dólar " + twoyearsago.Year + " - " + theDate.Year;
+            ViewBag.height = 400;
+            ViewBag.width = 1000;
             return View();
         }
 
@@ -79,10 +86,12 @@ namespace ProyectoFinanciera.Controllers
             DateTime twoyearsago = theDate.AddYears(-2);
             ViewBag.inicio = twoyearsago;
             ViewBag.final = theDate;
-            ViewBag.indicador = 19654;
+            ViewBag.indicador = 423;
             ViewBag.mayor = 7.5;
             ViewBag.menor = 5.5;
             ViewBag.titulo = "Tasa Básica Pasiva " + twoyearsago.Year + " - " + theDate.Year;
+            ViewBag.height = 400;
+            ViewBag.width = 1000;
             return View();
         }
 
@@ -96,6 +105,8 @@ namespace ProyectoFinanciera.Controllers
             ViewBag.menor = 3.25;
             ViewBag.indicador = 3541;
             ViewBag.titulo = "Tasa de Política Monetaria " + twoyearsago.Year+ " - "+theDate.Year;
+            ViewBag.height = 400;
+            ViewBag.width = 1000;
             return View();
         }
 
@@ -111,10 +122,13 @@ namespace ProyectoFinanciera.Controllers
             ViewBag.mayorpm = 5.5;
             ViewBag.menorpm = 3.25;
             ViewBag.indicadorpm = 3541;
-            ViewBag.indicadorbp = 19654;
+            ViewBag.indicadorbp = 423;
+            //ViewBag.indicadorbp = 19654;
             ViewBag.indicadorvd = 318;
             ViewBag.indicadorcd = 317;
-            ViewBag.titulo = "Tasa de Política Monetaria " + sixmonths.Month + " - " + theDate.Month+ ", "+ theDate.Year;
+            ViewBag.height = 300;
+            ViewBag.width = 500;
+            
             return View();
         }
 

@@ -3,17 +3,70 @@
     ViewBag.Title = "basicaPasiva";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Tasa Básica Pasiva</h2>
+<div class="text-center"><h2>Tasa Básica Pasiva</h2></div>
 
 
 <div class="row">
     <div class="panel panel-default">
-        <div class="panel-heading">Tasa Básica Pasiva</div>
+        <div class="panel-heading text-center"><h4>Descripción y Cálculo</h4></div>
+        <div class="panel-body">
+            <h5><i>Descripción</i></h5>
+            <p>
+                La tasa básica pasiva consiste en un promedio ponderado de las tasa de intereses brutas de captación de plazo en colones, implicadas en los diversos grupos de intermediarios financieros pertenecientes a las Otras Sociedades de depósito. El cálculo del promedio posteriormente se redondea al veinteavo punto porcentual más cercano.
+            </p>
+            <br />
+            <h5><i>Cálculo</i></h5>
+            <p>
+                Para hacer el cálculo efectivo se toma la muestra proveniente de los intermediarios financieros bajo la supervisión directa de la SUGEF.
+                El cálculo del promedio ponderado toma como efectivos los últimos 6 meses y toma la información de la captación de colones de la OSD como se mencionó anteriormente. La revisión de dicha captación se realizar solamente en febrero de cada año (como mínimo). 
+            </p>
+            <p>A partir de Ocubre del 2015, la Tasa Básica Pasiva se calcula con la siguiente fórmula:</p>
+            <div class="text-center">
+                <img src="~/Content/images/tbp.PNG" class="img-responsive center-block" />
+            </div>
+            <p>En donde T es la Tasa promedio ponderado de las tasas de las captaciones a plazo en colones y se determina con la siguiente fórmula:</p>
+            <div class="text-center">
+                <img src="~/Content/images/tcalc.PNG"  class="img-responsive center-block" />
+            </div>
+            <p>
+                En donde T<sub>j</sub> corresponde a las tasas de interes promedio de cada grupo de intermediarios financieros y w<sub>j</sub> corresponde a el promedio móvil de la captación total a plazo en moneda nacional
+                de los últimos seis meses para cada grupo de intermediarios financieros.
+            </p>
+            <br />
+            <p>A corresponde a un ajuste semanal que se hace con el fin de suavizar la transición en el cálculo de la TBP con una nueva metodología y se calcula así:</p>
+            <div class="text-center">
+                <img src="~/Content/images/ajuste.PNG"  class="img-responsive center-block"/>
+            </div>
+            <p>En donde D es diferencia existente al último miércoles de enero del 2016 entre la TBP y 𝑇.</p>
+            <p>
+                En donde s  corresponde la cantidad de semanas transcurridas a partir del
+                cambio en la metodología, de forma que cuando se completen 50 semanas el valor de A será 0.
+            </p>
+            <br />
+            <h5><i>Periodicidad</i></h5>
+            <p>La periodicidad es semanal. El banco realiza el anuncio de la tasa básica pasiva a regir desde el miércoles en la tarde con el fin de que los entes financieros puedan tomar decisiones en base a dicha tasa a regir el jueves. Es importante recalcar que en caso de que un día miércoles resulte en no hábil por cualquier razón, la tasa se calcula el día anterior hábil más cercano a dicha fecha. </p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading text-center"><h4>Implicaciones</h4></div>
+        <div class="panel-body">         
+            <p>
+                En el caso de las fluctuaciones, se puede decir que el alza en la TBP puede ser causada directamente por un aumento en la cantidad de inversiones realizadas en colones, ya que a largo plazo va a afectar el cálculo del promedio ponderado. Un alza significativa en el TBP significa un beneficio directo para dichos inversionistas en certificaciones en colones, sin embargo produce un alza en las tasas de interés para préstamos en colones, de manera conjunta. Por otra parte una baja significativa en la TBP puede traer consecuencias directas, como el desinterés de los inversionistas en certificaciones en colones, y su cambio a invertir en dólares, o como alternativa, invertir en activos. La baja en la TBP significa una reducción en las tasas de interés en la adquisición de préstamos, lo que puede llegar a beneficiar a los consumidores promedio y ayudar a reactivar la economía incentivando los préstamos con una tasa llamativa.
+            </p>
+            <p>La TBP también la utilizan los bancos para fijar las tasas que cobran en sus préstamos, sobre todo los de vivienda, por lo que si esta sube, afecta a las personas que tienen los préstamos en colones y si baja los beneficia</p>
+            <p>   Por último, es importante decir que la TBP y sus respectivas fluctuaciones no poseen una relación directa con los otros indicadores económicos, por lo que no se puede decir que es una causa para el alza o baja del tipo de cambio del dólar o de cualquier otra moneda a nivel internacional.</p>
+</div>
+    </div>
+</div>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4>Comportamiento Histórico Tasa Básica Pasiva</h4></div>
         <div class="panel-body graph">
             <p>
                 <img class="img-responsive" src='@Url.Action("graphTasas", "Indicadores", new{ inicio=ViewBag.inicio, final=ViewBag.final, indicador=ViewBag.indicador,
-                                                                         titulo = ViewBag.titulo, mayor= ViewBag.mayor, menor=ViewBag.menor })' />
+                                                                         titulo = ViewBag.titulo, mayor= ViewBag.mayor, menor=ViewBag.menor, height= ViewBag.height, width= ViewBag.width  })' />
             </p>
         </div>
     </div>

@@ -5,7 +5,6 @@
 <Chart BackColor=""White"" BackGradientStyle=""TopBottom"" BorderColor=""181, 64, 1""
 BorderWidth=""2"" BorderlineDashStyle=""Solid"" Palette=""SemiTransparent""
 AntiAliasing=""All"">
-
 <ChartAreas>
   <ChartArea Name=""Default"" _Template_=""All"" BackGradientStyle=""None""
      BackColor=""White"" BackSecondaryColor=""White""
@@ -13,14 +12,21 @@ AntiAliasing=""All"">
      ShadowColor=""Transparent"">
 
      <AxisX Title=""Fecha"" IsLabelAutoFit=""True"">
-
+        <LabelStyle Font=""Trebuchet MS, 10pt, style=Bold"" />
      </AxisX>
+<AxisY  IsLabelAutoFit=""True"">
+        <LabelStyle Font=""Trebuchet MS, 10pt, style=Bold"" />
+     </AxisY>
 
      <Area3DStyle Enable3D=""False"" Inclination=""60"" Rotation=""45""/>
   </ChartArea>
 </ChartAreas>
-</Chart>";
-    var myChart = new Chart(width: 1000, height: 400, theme: theme)
+<Legends>
+    <Legend _Template_=""All"" BackColor=""Transparent"" Docking=""Bottom"" Font=""Trebuchet MS, 10pt, style=Bold"" LegendStyle=""Row"">
+    </Legend>
+  </Legends>
+  </Chart>";
+    var myChart = new Chart(width: ViewBag.width, height:ViewBag.height, theme: theme)
 .AddTitle(ViewBag.Title).AddLegend()
 .SetYAxis("Tasa (%) ",ViewBag.menor, ViewBag.mayor)
 .AddSeries(
@@ -29,6 +35,6 @@ AntiAliasing=""All"">
     xValue: ViewBag.x,
     yValues: ViewBag.y)
 .Write();
-    
-    
+
+
 }

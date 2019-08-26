@@ -6,7 +6,14 @@
 }
 
 <h2>Nueva Pregunta</h2>
-
+<div class="alert alert-success alert-dismissable" id="Mensaje" hidden>
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+    Pregunta creada exitosamete.
+</div>
+<div class="alert alert-danger alert-dismissable" id="Error" hidden>
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+    Hubo un error, no se pudo realizar la pregunta.
+</div>
 
 @using (Html.BeginForm())
 {
@@ -34,7 +41,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.Descripcion, 10, 40, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -51,6 +58,18 @@
     @Html.ActionLink("Regresar", "Index")
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<script type="text/javascript">
+    $(document).ready(function(){
+
+
+    if ('@ViewBag.message' == "Mensaje") {
+    $("#Mensaje").removeAttr("hidden");
+    }
+    if ('@ViewBag.error' == "Error") {
+    $("#Error").removeAttr("hidden");
+    }
+
+    });
+</script>
+    
+

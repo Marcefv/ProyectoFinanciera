@@ -4,17 +4,62 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<h2>Tasa de Política Monetaria</h2>
+<div class="text-center"><h2>Tasa de Política Monetaria</h2></div>
+<br />
 
 
 <div class="row">
     <div class="panel panel-default">
-        <div class="panel-heading">Tasa de Política Monetaria</div>
+        <div class="panel-heading text-center"><h4>Descripción y Cálculo</h4></div>
+        <div class="panel-body">
+            <p>
+                La política monetaria es un área de la política económica, encargada a los bancos centrales, que tiene como propósito influenciar las variables monetarias y
+                financieras para lograr objetivos específicos, que en el caso costarricense, se circunscriben a una inflación baja y estable.
+            </p>
+
+            <p>
+                La inflación baja y estable contribuye a preservar el poder de compra de los salarios e ingresos de los habitantes del país y facilita la toma de decisiones,
+                favoreciendo el ahorro y la inversión y, en última instancia, el crecimiento económico.
+            </p>
+
+
+            <p>
+                La tasa política monetaria es una tasa de referencia, es la tasa que el Banco Central considera que es coherente con el costo de la liquidez,en un
+                momento dado y generalmente tiene impacto en el resto de tasas.
+            </p> 
+            
+            <p>
+                Se define la Tasa de Política Monetaria como la tasa de interés objetivo del
+                Banco Central de Costa Rica. Corresponde a la tasa de interés que
+                utiliza el Banco Central de Costa Rica como referencia para conducir el costo de
+                las operaciones a un día plazo en el Mercado Integrado de Liquidez dentro de un
+                corredor formado por las tasas de interés de sus facilidades permanentes de
+                crédito y de depósito en este mercado. Esta tasa la establece la Junta Directiva
+                del Banco Central de Costa Rica.
+            </p>
+            <p>No hay una periodicidad determinada para su cálculo, sin embargo, su valor vigente es publicado a diario</p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading text-center"><h4>Implicaciones</h4></div>
+        <div class="panel-body">
+            <p>
+                La tasa de política monetaria es utilizada por el BCCR para controlar la inflación. Si el banco cree que hay presiones inflacionarias, se sube la tasa, pues esto implica que los bancos, al salirles más caro obtener recursos del BCCR, aumentan las tasas que usan en sus préstamos y esto imlica que menos personas adquirirán préstamos, con lo que se baja la inflación.
+            </p>
+            <p>Por otro lado, si la inflación está por debajo de la meta, se baja la TPM para que bajen las tasas de intereses a clientes en los bancos, se pidan más créditos y se impulse la inflación</p>
+            <p>Es importante que , aunque la TPM afecta las tasas activas, no necesariamente afecta las tasas pasivas, las cuales corresponden a las que pagan los bancos a las personas por sus ahorros.</p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4>Comportamiento Histórico Tasa de Política Monetaria</h4></div>
         <div class="panel-body graph">
             <p>
                 <img class="img-responsive" src='@Url.Action("graphTasas", "Indicadores", new{ inicio=ViewBag.inicio, final=ViewBag.final, indicador=ViewBag.indicador,
-                                                                         titulo = ViewBag.titulo, mayor= ViewBag.mayor, menor=ViewBag.menor  })' />
+                                                                         titulo = ViewBag.titulo, mayor= ViewBag.mayor, menor=ViewBag.menor, height= ViewBag.height, width= ViewBag.width })' />
             </p>
         </div>
     </div>

@@ -125,11 +125,8 @@ namespace ProyectoFinanciera.Controllers
                     }
 
                     //envia correo con los indicadores
-                    if (ultimafecha==theDate)
-                    {
-                        correoIndicadores(ultimafecha, theDate);
-                    }
-                    else
+                 
+                    if (ultimafecha!=theDate)
                     {
                         correoIndicadores(ultimafecha.AddDays(1), theDate);
                     }
@@ -165,13 +162,28 @@ namespace ProyectoFinanciera.Controllers
                 do
                 {
                     var tbp=db.Indicadores.Where(x => (x.DES_FECHA == fechaDesde) && (x.COD_INDICADORINTERNO == 423)).First().NUM_VALOR;
-                    var tpm= db.Indicadores.Where(x => (x.DES_FECHA == fechaDesde) && (x.COD_INDICADORINTERNO == 3541)).First().NUM_VALOR;
-                    var cd= db.Indicadores.Where(x => (x.DES_FECHA == fechaDesde) && (x.COD_INDICADORINTERNO == 317)).First().NUM_VALOR;
-                    decimal vd= db.Indicadores.Where(x => x.DES_FECHA == fechaDesde && x.COD_INDICADORINTERNO == 318).First().NUM_VALOR;
-                    indicadores += "<p>Indicadores del "+fechaDesde.ToShortDateString()+": </p>" +
-                        "<ul> <li>Tipo de Cambio de Venta del Dólar: "+vd+"</li><li>Tipo de Cambio de Compra del Dólar: "+cd+"</li>" +
-                             "<li>Tasa de Política Monetaria: "+tpm+"</li><li>Tasa Básica Pasiva: "+tbp+"</li>" +
-                             "</ul>";
+                    var cd = db.Indicadores.Where(x => (x.DES_FECHA == fechaDesde) && (x.COD_INDICADORINTERNO == 317)).First().NUM_VALOR;
+                    decimal vd = db.Indicadores.Where(x => x.DES_FECHA == fechaDesde && x.COD_INDICADORINTERNO == 318).First().NUM_VALOR;
+                    try
+                    {
+                        var tpm = db.Indicadores.Where(x => (x.DES_FECHA == fechaDesde) && (x.COD_INDICADORINTERNO == 3541)).First().NUM_VALOR;
+
+                        indicadores += "<p>Indicadores del " + fechaDesde.ToShortDateString() + ": </p>" +
+                            "<ul> <li>Tipo de Cambio de Venta del Dólar: " + vd + "</li><li>Tipo de Cambio de Compra del Dólar: " + cd + "</li>" +
+                                 "<li>Tasa de Política Monetaria: " + tpm + "</li><li>Tasa Básica Pasiva: " + tbp + "</li>" +
+                                 "</ul>";
+                    }
+                    catch (Exception)
+                    {
+
+
+                        indicadores += "<p>Indicadores del " + fechaDesde.ToShortDateString() + ": </p>" +
+                           "<ul> <li>Tipo de Cambio de Venta del Dólar: " + vd + "</li><li>Tipo de Cambio de Compra del Dólar: " + cd + "</li>" +
+                                "<li>Tasa Básica Pasiva: " + tbp + "</li>" +
+                                "</ul>";
+                    }
+                    
+
                     fechaDesde = fechaDesde.AddDays(1);
                 } while (fechaDesde<=fechaHasta);
                 foreach (var cliente in clientes)
